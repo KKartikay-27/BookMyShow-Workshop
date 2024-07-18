@@ -1,9 +1,11 @@
-import React, { Children } from 'react'
+import React from 'react'
 
-import {Tabs} from 'antd'
+import {message,Tabs} from 'antd'
 import MovieList from './MovieList'
 import TheatresTable from './TheatresTable'
-import MovieFrom from './MovieForm'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 function Admin() {
 

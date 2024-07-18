@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { RegisterUser } from "../calls/users";
 
 function Register() {
+  const navigate = useNavigate();
+
   const onFinish = async (values) => {
     console.log(values);
     try {
@@ -20,13 +22,11 @@ function Register() {
     }
   };
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <>
