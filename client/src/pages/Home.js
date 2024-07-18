@@ -15,6 +15,18 @@ const Home = () => {
 
   const getData = async () => {
     try {
+
+      const user = await axios.get("/api/users/get-current-user",{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+
+      if(user.data.data.role === "partner" || user.data.data.role === "admin"){
+        navigate("/partner");
+        message.error("You are not allowed to access this page");
+      }
+
       dispatch(showLoading());
       const response = await getAllMovies();
       if (response.success) {

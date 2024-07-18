@@ -7,6 +7,36 @@ import MovieFrom from './MovieForm'
 
 function Admin() {
 
+  const navigate = useNavigate();
+    const checkUser = async () => {
+        const user = await axios.get("/api/users/get-current-user", {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        console.log(""+user.data.data);
+        if(!user){
+            navigate("/admin");
+        }
+
+        if (user.data.data.role === "partner" ) {
+            navigate("/partner");
+            message.error("You are not allowed to access this page");
+        }
+        else if(user.data.data.role === "user")
+        {
+            navigate("/");
+            message.error("You are not allowed to access this page");
+        }
+        else
+        {
+            navigate("/admin");
+        }
+    }
+
+    checkUser();
+
+
     const tabItems = [
         { 
             key : '1',
